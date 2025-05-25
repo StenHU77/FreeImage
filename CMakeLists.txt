@@ -1,5 +1,7 @@
 cmake_minimum_required(VERSION 3.16)
 project(FreeImage VERSION 3.19.0 LANGUAGES C CXX)
+find_package(getopt REQUIRED)
+target_link_libraries(FreeImage PRIVATE getopt)
 add_definitions(-Dgetopt=_getopt)
 add_definitions(-DFREEIMAGE_EXPORTS)
 # Options for configuring the build
