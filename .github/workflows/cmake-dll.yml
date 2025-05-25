@@ -47,7 +47,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
       - name: Install getopt for MSVC
-        run: vcpkg install getopt-win32:x64-windows
+        run: vcpkg install getopt:x64-windows
       - name: Configure (${{ matrix.configuration }})
         run: |
           if [ "${{ matrix.compiler }}" == "msvc" ]; then
