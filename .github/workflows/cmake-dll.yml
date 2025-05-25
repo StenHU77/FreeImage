@@ -54,7 +54,8 @@ jobs:
           export PATH=$PATH:/c/Users/runneradmin/AppData/Local/Temp/chocolatey/chocolatey/getopt
       - name: Verify getopt installation
         run: |
-          where getopt || echo "getopt not found!"
+          ls C:/ProgramData/Chocolatey || echo "getopt not found!"
+          ls C:/ProgramData/Chocolatey/lib || echo "getopt lib not found!"
       - name: Configure (${{ matrix.configuration }})
         run: |
           if [ "${{ matrix.compiler }}" == "msvc" ]; then
