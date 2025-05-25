@@ -49,13 +49,13 @@ jobs:
       - name: Install getopt using Chocolatey
         run: |
           choco install getopt -y
+          mv C:/Users/runneradmin/AppData/Local/Temp/chocolatey/chocolatey/getopt build/getopt
       - name: Refresh environment variables
         run: |
-          export PATH=$PATH:/c/Users/runneradmin/AppData/Local/Temp/chocolatey/chocolatey/getopt
+          export PATH=$PATH:build/getopt
       - name: Verify getopt installation
         run: |
-          ls C:/ProgramData/Chocolatey/getopt || echo "getopt not found!"
-          ls C:/ProgramData/Chocolatey/getopt/lib || echo "getopt lib not found!"
+          ls build/getopt || echo "getopt not found!"
       - name: Configure (${{ matrix.configuration }})
         run: |
           if [ "${{ matrix.compiler }}" == "msvc" ]; then
