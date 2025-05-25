@@ -48,7 +48,13 @@ jobs:
         uses: actions/checkout@v4
       - name: Install getopt using Chocolatey
         run: |
-          choco install getopt
+          choco install getopt -y
+      - name: Refresh environment variables
+        run: |
+          refreshenv
+      - name: Verify getopt installation
+        run: |
+          where getopt || echo "getopt not found!"
       - name: Configure (${{ matrix.configuration }})
         run: |
           if [ "${{ matrix.compiler }}" == "msvc" ]; then
