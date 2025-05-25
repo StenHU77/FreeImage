@@ -21,9 +21,10 @@ jobs:
 #          - windows-mingw
         cppstandard:
 #          - 11
+          - 14
 #          - 17
 #          - 20
-          - 23
+#          - 23
         cstandard:
           - 17
         configuration:
