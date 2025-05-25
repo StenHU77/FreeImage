@@ -56,7 +56,7 @@ jobs:
           export PATH=$PATH:build/getopt
       - name: Verify getopt installation
         run: |
-          ls build/getopt || echo "getopt not found!"
+          ls build/getopt/binaries || echo "getopt not found!"
       - name: Configure (${{ matrix.configuration }})
         run: |
           if [ "${{ matrix.compiler }}" == "msvc" ]; then
