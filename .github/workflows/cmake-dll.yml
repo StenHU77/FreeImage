@@ -46,10 +46,12 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+      - name: Install getopt for MSVC
+        run: vcpkg install getopt-win32
       - name: Configure (${{ matrix.configuration }})
         run: |
           if [ "${{ matrix.compiler }}" == "msvc" ]; then
-            cmake -S . -B build -DCMAKE_CXX_STANDARD=${{ matrix.cppstandard }} -DCMAKE_INSTALL_PREFIX=install_dir -DBUILD_SHARED_LIBS=ON
+            cmake -S . -B build -DCMAKE_CXX_STANDARD=${{ matrix.cppstandard }} -DCMAKE_INSTALL_PREFIX=install_dir -DBUILD_SHARED_LIBS=ON -DCMAKE_CXX_FLAGS="/Dgetopt=_getopt"
           elif [ "${{ matrix.compiler }}" == "mingw" ]; then
             cmake -S . -B build -DBUILD_TESTS=ON -DCMAKE_BUILD_TYPE=${{ matrix.configuration }} -DUNICODE=ON -D_UNICODE=ON -DCMAKE_CXX_STANDARD=${{ matrix.cppstandard }} -DCMAKE_C_STANDARD=${{ matrix.cstandard }} -G "MinGW Makefiles"
           else
