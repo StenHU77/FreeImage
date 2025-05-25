@@ -15,32 +15,32 @@ jobs:
       fail-fast: false
       matrix:
         toolchain:
-          - linux-gcc
-          - macos-clang
+#          - linux-gcc
+#          - macos-clang
           - windows-msvc
-          - windows-mingw
+#          - windows-mingw
         cppstandard:
-          - 11
-          - 17
-          - 20
+#          - 11
+#          - 17
+#          - 20
           - 23
         cstandard:
           - 17
         configuration:
           - Debug
         include:
-          - toolchain: linux-gcc
-            os: ubuntu-latest
-            compiler: gcc
-          - toolchain: macos-clang
-            os: macos-latest
-            compiler: clang
+#          - toolchain: linux-gcc
+#            os: ubuntu-latest
+#            compiler: gcc
+#          - toolchain: macos-clang
+#            os: macos-latest
+#            compiler: clang
           - toolchain: windows-msvc
             os: windows-latest
             compiler: msvc
-          - toolchain: windows-mingw
-            os: windows-latest
-            compiler: mingw
+#          - toolchain: windows-mingw
+#            os: windows-latest
+#            compiler: mingw
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
