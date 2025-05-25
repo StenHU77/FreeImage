@@ -50,7 +50,7 @@ jobs:
         run: |
           choco install getopt -y
           mkdir -p build/getopt
-          mv C:/ProgramData/Chocolatey/lib/getopt build/getopt
+          mv C:/ProgramData/Chocolatey/lib/getopt build
       - name: Refresh environment variables
         run: |
           export PATH=$PATH:build/getopt
