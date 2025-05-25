@@ -20,13 +20,14 @@ jobs:
           - windows-msvc
 #          - windows-mingw
         cppstandard:
-#          - 11
-          - 14
+          - 11
+#          - 14
 #          - 17
 #          - 20
 #          - 23
         cstandard:
-          - 17
+          - 11
+#          - 17
         configuration:
           - Debug
         include:
@@ -48,7 +49,7 @@ jobs:
       - name: Configure (${{ matrix.configuration }})
         run: |
           if [ "${{ matrix.compiler }}" == "msvc" ]; then
-            cmake -S . -B build -DNO_BUILD_JXR=OFF -DBUILD_TESTS=ON -DCMAKE_CXX_STANDARD=${{ matrix.cppstandard }} -DUNICODE=ON -D_UNICODE=ON -DCMAKE_C_STANDARD=${{ matrix.cstandard }}
+            cmake -S . -B build -DNO_BUILD_JXR=OFF -DNO_BUILD_LIBTIFF=OFF -DNO_BUILD_LIBRAWLITE=OFF -DNO_BUILD_WEBP=OFF -DNO_BUILD_ZLIB=OFF -DNO_BUILD_OPENEXR=OFF -DBUILD_TESTS=ON -DCMAKE_CXX_STANDARD=${{ matrix.cppstandard }} -DUNICODE=ON -D_UNICODE=ON -DCMAKE_C_STANDARD=${{ matrix.cstandard }}
           elif [ "${{ matrix.compiler }}" == "mingw" ]; then
             cmake -S . -B build -DBUILD_TESTS=ON -DCMAKE_BUILD_TYPE=${{ matrix.configuration }} -DUNICODE=ON -D_UNICODE=ON -DCMAKE_CXX_STANDARD=${{ matrix.cppstandard }} -DCMAKE_C_STANDARD=${{ matrix.cstandard }} -G "MinGW Makefiles"
           else
