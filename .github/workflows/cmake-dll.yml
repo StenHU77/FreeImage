@@ -46,17 +46,6 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-      - name: Install getopt using Chocolatey
-        run: |
-          choco install getopt -y
-          mkdir -p build/getopt
-          mv C:/ProgramData/Chocolatey/lib/getopt build
-      - name: Refresh environment variables
-        run: |
-          export PATH=$PATH:build/getopt
-      - name: Verify getopt installation
-        run: |
-          ls build/getopt/binaries || echo "getopt not found!"
       - name: Configure (${{ matrix.configuration }})
         run: |
           if [ "${{ matrix.compiler }}" == "msvc" ]; then
