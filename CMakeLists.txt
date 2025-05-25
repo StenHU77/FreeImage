@@ -1,6 +1,7 @@
 cmake_minimum_required(VERSION 3.16)
 project(FreeImage VERSION 3.19.0 LANGUAGES C CXX)
 add_definitions(-Dgetopt=_getopt)
+add_definitions(-DFREEIMAGE_EXPORTS)
 # Options for configuring the build
 option(BUILD_SHARED_LIBS "Build shared libraries" OFF)
 option(BUILD_JXR "Build JPEG-XR support" WIN32)
