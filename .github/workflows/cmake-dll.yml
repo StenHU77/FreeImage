@@ -51,7 +51,7 @@ jobs:
           choco install getopt -y
       - name: Refresh environment variables
         run: |
-          refreshenv
+          export PATH=$PATH:/c/Users/runneradmin/AppData/Local/Temp/chocolatey/chocolatey/getopt
       - name: Verify getopt installation
         run: |
           where getopt || echo "getopt not found!"
