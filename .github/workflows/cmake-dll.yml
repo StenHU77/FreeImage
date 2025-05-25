@@ -49,6 +49,7 @@ jobs:
       - name: Install getopt using Chocolatey
         run: |
           choco install getopt -y
+          mkdir -p build/getopt
           mv C:/ProgramData/Chocolatey/lib/getopt build/getopt
       - name: Refresh environment variables
         run: |
