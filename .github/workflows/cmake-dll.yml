@@ -20,16 +20,16 @@ jobs:
           - windows-msvc
 #          - windows-mingw
         cppstandard:
-#          - 11
+          - 11
 #          - 14
 #          - 17
 #          - 20
-          - 23
+#          - 23
         cstandard:
 #          - 11
           - 17
         configuration:
-          - Debug
+          - Release
         include:
 #          - toolchain: linux-gcc
 #            os: ubuntu-latest
@@ -47,11 +47,11 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
       - name: Install getopt for MSVC
-        run: vcpkg install getopt-win32
+        run: vcpkg install getopt-win32:x64-windows
       - name: Configure (${{ matrix.configuration }})
         run: |
           if [ "${{ matrix.compiler }}" == "msvc" ]; then
-            cmake -S . -B build -DCMAKE_CXX_STANDARD=${{ matrix.cppstandard }} -DCMAKE_INSTALL_PREFIX=install_dir -DBUILD_SHARED_LIBS=ON
+            cmake -S . -B build -DCMAKE_CXX_STANDARD=${{ matrix.cppstandard }} -DCMAKE_INSTALL_PREFIX=install_dir -DBUILD_SHARED_LIBS=ON -A x64
           elif [ "${{ matrix.compiler }}" == "mingw" ]; then
             cmake -S . -B build -DBUILD_TESTS=ON -DCMAKE_BUILD_TYPE=${{ matrix.configuration }} -DUNICODE=ON -D_UNICODE=ON -DCMAKE_CXX_STANDARD=${{ matrix.cppstandard }} -DCMAKE_C_STANDARD=${{ matrix.cstandard }} -G "MinGW Makefiles"
           else
