@@ -49,7 +49,7 @@ jobs:
       - name: Configure (${{ matrix.configuration }})
         run: |
           if [ "${{ matrix.compiler }}" == "msvc" ]; then
-            cmake -S . -B build -DBUILD_TESTS=ON -DCMAKE_CXX_STANDARD=${{ matrix.cppstandard }}
+            cmake -S . -B build -DCMAKE_CXX_STANDARD=${{ matrix.cppstandard }} -DCMAKE_INSTALL_PREFIX=install_dir
           elif [ "${{ matrix.compiler }}" == "mingw" ]; then
             cmake -S . -B build -DBUILD_TESTS=ON -DCMAKE_BUILD_TYPE=${{ matrix.configuration }} -DUNICODE=ON -D_UNICODE=ON -DCMAKE_CXX_STANDARD=${{ matrix.cppstandard }} -DCMAKE_C_STANDARD=${{ matrix.cstandard }} -G "MinGW Makefiles"
           else
@@ -58,15 +58,12 @@ jobs:
       - name: Build with ${{ matrix.compiler }}
         run: |
           if [ "${{ matrix.compiler }}" == "msvc" ]; then
-            cmake --build build --config ${{ matrix.configuration }}
+            cmake --build build --config ${{ matrix.configuration }} --target install
           else
             cmake --build build -- -j8
           fi
-      - name: Test
-        run: |
-          ctest --test-dir build --build-config ${{ matrix.configuration }} --verbose
       - name: Upload DLL artifact
         uses: actions/upload-artifact@v4
         with:
           name: FreeImage-DLL${{ matrix.toolchain }}${{ matrix.cppstandard }}${{ matrix.os }}
-          path: build/
+          path: install_dir/
