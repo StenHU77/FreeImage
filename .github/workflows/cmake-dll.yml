@@ -46,8 +46,15 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-      - name: Install getopt for MSVC
-        run: vcpkg install getopt:x64-windows
+      - name: Remove getopt-win32 to avoid conflicts
+        run: |
+          vcpkg remove getopt-win32:x64-windows || true
+      - name: Install official getopt (64-bit)
+        run: |
+          vcpkg install getopt:x64-windows
+      - name: Verify getopt installation
+        run: |
+          ls C:/vcpkg/packages/getopt_x64-windows || echo "getopt package might be empty"
       - name: Configure (${{ matrix.configuration }})
         run: |
           if [ "${{ matrix.compiler }}" == "msvc" ]; then
