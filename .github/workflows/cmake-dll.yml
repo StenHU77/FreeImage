@@ -46,9 +46,9 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-      - name: Install official getopt using MSYS2
+      - name: Install getopt using Chocolatey
         run: |
-          pacman -S --noconfirm mingw-w64-x86_64-getopt
+          choco install getopt
       - name: Configure (${{ matrix.configuration }})
         run: |
           if [ "${{ matrix.compiler }}" == "msvc" ]; then
